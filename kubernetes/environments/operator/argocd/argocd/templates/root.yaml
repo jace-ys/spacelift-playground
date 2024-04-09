@@ -1,0 +1,19 @@
+---
+# Source: argocd/templates/root.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-root
+  namespace: argocd
+spec:
+  project: default
+  syncPolicy: {}
+  destination:
+    namespace: argocd
+    name: operator
+  source:
+    path: argocd/root
+    repoURL: git@github.com:jace-ys/spacelift-playground.git
+    targetRevision: HEAD
+    directory:
+      recurse: true

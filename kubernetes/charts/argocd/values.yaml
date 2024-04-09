@@ -1,0 +1,19 @@
+---
+argo-cd:
+  configs:
+    cm:
+      cluster:
+        inClusterEnabled: "false"
+
+  server:
+    service:
+      annotations:
+        tailscale.com/expose: "true"
+    serviceAccount:
+      annotations:
+        iam.gke.io/gcp-service-account: argocd@emp-jace-a850.iam.gserviceaccount.com
+
+  controller:
+    serviceAccount:
+      annotations:
+        iam.gke.io/gcp-service-account: argocd@emp-jace-a850.iam.gserviceaccount.com
