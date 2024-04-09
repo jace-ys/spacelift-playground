@@ -1,0 +1,38 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: main
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: git@github.com:jace-ys/spacelift-playground.git
+      revision: HEAD
+      directories:
+      # kubernetes/environments/<cluster>/<namespace>/<app-name>
+      - path: kubernetes/environments/*/*/*
+      - path: kubernetes/environments/operator/argocd/argocd
+        exclude: true
+  template:
+    metadata:
+      name: '{{ .path.basenameNormalized }}-{{ index .path.segments 2 }}'
+    spec:
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+        - ServerSideApply=true
+        - CreateNamespace=true
+      project: '{{ index .path.segments 2 }}'
+      source:
+        repoURL: git@github.com:jace-ys/spacelift-playground.git
+        targetRevision: HEAD
+        path: '{{ .path.path }}'
+        directory:
+          recurse: true
+      destination:
+        name: '{{ index .path.segments 2 }}'
+        namespace: '{{ index .path.segments 3 }}'

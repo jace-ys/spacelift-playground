@@ -1,0 +1,4 @@
+---
+tailscale-operator:
+  apiServerProxyConfig:
+    mode: "noauth"

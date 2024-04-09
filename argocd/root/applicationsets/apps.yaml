@@ -1,0 +1,45 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - matrix:
+      generators:
+      - git:
+          repoURL: git@github.com:jace-ys/spacelift-playground.git
+          revision: HEAD
+          directories:
+          - path: apps/*
+      - clusters:
+          selector:
+            matchLabels:
+              argocd.argoproj.io/secret-type: "cluster"
+              example.com/apps-cluster: "true"
+  template:
+    metadata:
+      name: '{{ .path.basenameNormalized }}-{{ .name }}'
+    spec:
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+        - ServerSideApply=true
+        - CreateNamespace=true
+      project: '{{ .name }}'
+      source:
+        repoURL: git@github.com:jace-ys/spacelift-playground.git
+        targetRevision: HEAD
+        path: '{{ .path.path }}/k8s'
+        helm:
+          ignoreMissingValueFiles: true
+          valueFiles:
+          - values.yaml
+          - "{{ .name }}-values.yaml"
+      destination:
+        name: '{{ .name }}'
+        namespace: '{{ .path.basenameNormalized }}'
