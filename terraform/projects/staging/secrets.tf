@@ -25,11 +25,11 @@ resource "kubernetes_secret" "operator_oauth" {
   }
 }
 
-resource "kubernetes_secret" "cluster_operator" {
+resource "kubernetes_secret" "cluster_staging" {
   provider = kubernetes.operator
 
   metadata {
-    name      = "staging-operator"
+    name      = "cluster-staging"
     namespace = "argocd"
 
     labels = {

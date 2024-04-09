@@ -13,6 +13,7 @@ argocd-init:
 
 argocd-rm:
 	kubectl delete --namespace argocd -R -f kubernetes/environments/operator/argocd/argocd
+	terraform -chdir=argocd/init destroy
 
 charts:
 	rm -rf kubernetes/environments/operator/tailscale-operator/tailscale-operator
