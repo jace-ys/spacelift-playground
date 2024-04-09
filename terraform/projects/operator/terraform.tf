@@ -23,11 +23,11 @@ provider "google-beta" {
 
 data "google_client_config" "default" {}
 
-provider "kubernetes" {
-  host  = "https://${module.cluster.cluster_public_endpoint}"
-  token = data.google_client_config.default.access_token
+# provider "kubernetes" {
+#   host  = "https://${module.cluster.cluster_public_endpoint}"
+#   token = data.google_client_config.default.access_token
 
-  client_certificate     = base64decode(module.cluster.cluster_client_certificate)
-  client_key             = base64decode(module.cluster.cluster_client_key)
-  cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
-}
+#   client_certificate     = base64decode(module.cluster.cluster_client_certificate)
+#   client_key             = base64decode(module.cluster.cluster_client_key)
+#   cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
+# }

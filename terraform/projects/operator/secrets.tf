@@ -20,7 +20,7 @@ resource "kubernetes_secret" "operator_oauth" {
   }
 
   data = {
-    client_id     = "k59kG12dh521CNTRL"
+    client_id     = "krxiskDdLk11CNTRL"
     client_secret = data.google_secret_manager_secret_version.tailscale_operator.secret_data
   }
 }
