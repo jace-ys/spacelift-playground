@@ -1,0 +1,14 @@
+---
+version: "1"
+
+stack_defaults:
+  before_init:
+  - terraform fmt -check
+
+stacks:
+  staging:
+    project_root: terraform/projects/staging
+    terraform_version: 1.5.7
+  operator:
+    project_root: terraform/projects/operator
+    terraform_version: 1.5.7
