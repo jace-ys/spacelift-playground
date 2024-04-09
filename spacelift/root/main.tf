@@ -15,7 +15,7 @@ resource "spacelift_stack" "project" {
   terraform_smart_sanitization = true
   administrative               = false
 
-  labels = ["feature:add_plan_pr_comment", "google-provider"]
+  labels = ["feature:add_plan_pr_comment", "google-provider", "security"]
 }
 
 resource "spacelift_gcp_service_account" "project" {
