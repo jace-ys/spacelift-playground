@@ -1,0 +1,22 @@
+- Paid features:
+  - OIDC (Cloud)
+  - Drift detection (Enterprise)
+  - Private workers (Enterprise)
+  - Audit trail (Enterprise)
+
+- Similar to Atlantis in many ways but with a nice-ish UI
+  - Can also do comment-based workflows
+- State is stored in Spacelift, but can be exported out
+- There's no IP ranges (of public workers) provided by Spacelift for us to whitelist
+- Contexts are quite nice, similar to CircleCI
+- Tasks are quite nice for running Terraform commands with a historial trail
+  - There's also a state history section
+- Hooks sound interesting but not sure what use cases they fulfill
+- Resources section is neat
+- Not entirely sure how Dependencies work
+- Obviously OPA policies would be neat, but requires work!
+  - Atlantis has this feature too with conftest
+- Not clear whethers PRs are open on a stack
+
+- One of the annoying things about Terraform is that it is state-based rather than reality-based, unlike KCC
+  - Makes it tedious and time-consuming to import existing resources into state to apply a plan
