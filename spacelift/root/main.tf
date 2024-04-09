@@ -7,7 +7,7 @@ resource "spacelift_stack" "project" {
 
   space_id                     = "root"
   name                         = each.key
-  description                  = "Project - ${each.key}"
+  description                  = "Project: ${each.key}"
   repository                   = "spacelift-playground"
   branch                       = "main"
   project_root                 = "terraform/projects/${each.key}"
