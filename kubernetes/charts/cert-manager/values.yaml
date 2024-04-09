@@ -1,0 +1,9 @@
+---
+cert-manager:
+  installCRDs: true
+  enableCertificateOwnerRef: true
+
+  global:
+    leaderElection:
+      namespace: cert-manager
+
